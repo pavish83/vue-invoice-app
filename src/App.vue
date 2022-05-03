@@ -1,23 +1,27 @@
 <template>
-  <div v-if="!mobile" class="app flex flex-column">
-    <NavigationBar />
-    <div class="app-content flex flex-column">
-      <transition name="invoice">
-        <InvoiceModal v-if="invoiceModal" />
-      </transition>
-      <router-view />
+  <div v-if="invoicesLoaded">
+    <div v-if="!mobile" class="app flex flex-column">
+      <NavigationBar />
+      <div class="app-content flex flex-column">
+        <ConfirmModal v-if="confirmModalActive"/>
+        <transition name="invoice">
+          <InvoiceModal v-if="invoiceModal" />
+        </transition>
+        <router-view />
+      </div>
     </div>
-  </div>
-  <div v-else class="mobile-message flex flex-column">
-    <h2>Sorry, this app is not supported on Mobile Devices</h2>
-    <p>To use this app, please use a computer or Tablet</p>
+    <div v-else class="mobile-message flex flex-column">
+      <h2>Sorry, this app is not supported on Mobile Devices</h2>
+      <p>To use this app, please use a computer or Tablet</p>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import NavigationBar from './components/NavigationBar.vue'
-import InvoiceModal from './components/InvoiceModal.vue'
+import {mapState, mapActions} from 'vuex';
+import NavigationBar from './components/NavigationBar'
+import InvoiceModal from './components/InvoiceModal'
+import ConfirmModal from './components/ConfirmModal'
 
 export default {
   data() {
@@ -27,13 +31,16 @@ export default {
   },
   components: {
     NavigationBar,
-    InvoiceModal
+    InvoiceModal,
+    ConfirmModal
   },
   created() {
+    this.GET_INVOICES();
     this.checkScreen();
     window.addEventListener('resize', this.checkScreen);
   },
   methods: {
+    ...mapActions(['GET_INVOICES']),
     checkScreen() {
       const windowWidth = window.innerWidth;
       if(windowWidth <= 750) {
@@ -44,7 +51,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['invoiceModal'])
+    ...mapState(['invoiceModal', 'confirmModalActive', 'invoicesLoaded'])
   }
 }
 </script>

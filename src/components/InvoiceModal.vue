@@ -1,7 +1,7 @@
 <template>
   <div @click="checkClick" ref="invoiceWrap" class="invoice-wrap flex flex-column">
     <form @submit.prevent="submitForm" class="invoice-content">
-
+      <LoadingSpinner v-show="loading"/>
       <!-- Bill From -->
       <div class="bill-from flex flex-column">
         <h4>Bill From</h4>
@@ -121,6 +121,7 @@
 
 <script>
 import db from '../firebase/firebaseInit';
+import LoadingSpinner from '../components/LoadingSpinner'
 import {mapMutations} from 'vuex';
 import {uid} from 'uid';
 export default {
@@ -128,6 +129,7 @@ export default {
     data() {
         return {
             dateOptions: { year: "numeric", month: "short", day: "numeric" },
+            loading: null,
             billerStreetAddress: null,
             billerCity: null,
             billerZipCode: null,
@@ -150,13 +152,21 @@ export default {
             invoiceTotal: 0,
         }
     },
+    components: {
+      LoadingSpinner
+    },
     created(){
       // get current date for invoice date field
       this.invoiceDateUnix = Date.now();
       this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString('en-us', this.dateOptions);
     },
     methods: {
-      ...mapMutations(['TOGGLE_INVOICE']),
+      ...mapMutations(['TOGGLE_INVOICE', 'TOGGLE_CONFIRM_MODAL']),
+      checkClick(e) {
+        if(e.target === this.$refs.invoiceWrap) {
+          this.TOGGLE_CONFIRM_MODAL();
+        }
+      },
       closeInvoice() {
         this.TOGGLE_INVOICE();
       },
@@ -190,6 +200,8 @@ export default {
           return;
         }
 
+        this.loading = true;
+
         this.calInvoiceTotal();
 
         const dataBase = db.collection('invoices').doc();
@@ -218,11 +230,14 @@ export default {
           invoiceDraft: this.invoiceDraft,
           invoicePaid: null,
         });
+        
+        this.loading = false;
+
         this.TOGGLE_INVOICE();
       },
       submitForm() {
         this.uploadInvoice();
-      }
+      },
     },
     watch: {
       paymentTerms() {
