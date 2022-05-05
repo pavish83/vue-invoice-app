@@ -1,6 +1,6 @@
 <template>
   <div v-if="invoicesLoaded">
-    <div v-if="!mobile" class="app flex flex-column">
+    <div class="app flex flex-column">
       <NavigationBar />
       <div class="app-content flex flex-column">
         <ConfirmModal v-if="confirmModalActive"/>
@@ -9,10 +9,6 @@
         </transition>
         <router-view />
       </div>
-    </div>
-    <div v-else class="mobile-message flex flex-column">
-      <h2>Sorry, this app is not supported on Mobile Devices</h2>
-      <p>To use this app, please use a computer or Tablet</p>
     </div>
   </div>
 </template>
@@ -73,12 +69,18 @@ export default {
   @media (min-width: 900px) {
     flex-direction: row !important;
   }
+  @media (max-width: 900px) {
+    font-size: 11px;
+  }
 }
 
 .app-content {
   padding: 0 20px;
   flex: 1;
   position: relative;
+  @media (max-width: 900px) {
+    padding: 0;
+  }
 }
 
 .mobile-message {
@@ -113,6 +115,10 @@ button,
   font-size: 12px;
   margin-right: 8px;
   color: #fff;
+  @media (max-width: 900px) {
+    padding: 5px 4px;
+    font-size: 11px;
+  }
 }
 
 .dark-purple {
@@ -176,6 +182,11 @@ button,
   align-items: center;
   padding: 8px 30px;
   border-radius: 10px;
+  @media (max-width: 900px) {
+    padding: 8px 5px;
+    font-size: 11px;
+    margin-right: 0;
+  }
 }
 
 .paid {

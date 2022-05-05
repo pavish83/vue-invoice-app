@@ -169,11 +169,17 @@ export default {
     align-items: center;
     padding: 24px 32px;
     font-size: 12px;
+    @media (max-width: 900px) {
+        padding: 15px 5px;
+    }
     .left {
       align-items: center;
       span {
         color: #dfe3fa;
         margin-right: 16px;
+        @media (max-width: 900px) {
+            margin-right: 3px;
+        }
       }
     }
     .right {
@@ -187,6 +193,9 @@ export default {
   .invoice-details {
     padding: 48px;
     margin-top: 24px;
+    @media (max-width: 900px) {
+        padding: 10px;
+    }
     .top {
       div {
         color: #dfe3fa;
@@ -199,9 +208,15 @@ export default {
           text-transform: uppercase;
           color: #fff;
           margin-bottom: 8px;
+          @media (max-width: 900px) {
+            font-size: 15px;
+          }
         }
         p:nth-child(2) {
           font-size: 16px;
+          @media (max-width: 900px) {
+            font-size: 12px;
+          }
         }
         span {
           color: #888eb0;
@@ -216,6 +231,9 @@ export default {
       margin-top: 50px;
       color: #dfe3fa;
       gap: 16px;
+      @media (max-width: 900px) {
+        margin-top: 30px;
+      }
       h4 {
         font-size: 12px;
         font-weight: 400;
@@ -223,6 +241,10 @@ export default {
       }
       p {
         font-size: 16px;
+        @media (max-width: 900px) {
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
       }
       .bill,
       .payment {
@@ -239,6 +261,9 @@ export default {
       .bill {
         p:nth-child(2) {
           font-size: 16px;
+          @media (max-width: 900px) {
+            font-size: 12px;
+          }
         }
         p:nth-child(3) {
           margin-top: auto;
@@ -253,6 +278,9 @@ export default {
     }
     .bottom {
       margin-top: 50px;
+      @media (max-width: 900px) {
+        margin-top: 30px;
+      }
       .billing-items {
         padding: 32px;
         border-radius: 20px 20px 0 0;
@@ -300,6 +328,9 @@ export default {
         p:nth-child(2) {
           font-size: 28px;
           text-align: right;
+          @media (max-width: 900px) {
+            font-size: 15px;
+          }
         }
       }
     }

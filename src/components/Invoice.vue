@@ -40,8 +40,15 @@ export default {
   padding: 28px 32px;
   background-color: #1e2139;
   align-items: center;
+  @media (max-width: 900px) {
+    padding: 28px 5px;
+    font-size: 11px;
+  }
   span {
     font-size: 13px;
+    @media (max-width: 900px) {
+      font-size: 11px;
+    }
   }
   .left {
     align-items: center;
@@ -62,6 +69,9 @@ export default {
       flex: 1;
       font-size: 16px;
       font-weight: 600px;
+      @media (max-width: 900px) {
+        font-size: 11px;
+      }
     }
   }
 }

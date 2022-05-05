@@ -346,6 +346,9 @@ export default {
   @media (min-width: 900px) {
     left: 90px;
   }
+  @media (max-width: 900px) {
+    z-index: 99999;
+  }
   .invoice-content {
     position: relative;
     padding: 56px;
@@ -354,6 +357,9 @@ export default {
     background-color: #141625;
     color: #fff;
     box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @media (max-width: 900px) {
+      padding: 20px;
+    }
     h1 {
       margin-bottom: 48px;
       color: #fff;

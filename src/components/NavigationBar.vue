@@ -32,6 +32,9 @@ export default {
            @media (min-width: 900px) {
                width: 100%;
            }
+           @media (max-width: 900px) {
+               padding: 5px 15px;
+           }
 
            img {
                width: auto;
